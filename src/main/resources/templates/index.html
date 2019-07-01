@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<h1>Fields:</h1>
+
+<table class="items">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Lat</th>
+        <th>Lon</th>
+        <th>AccountName</th>
+        <th>AccountEmail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="field : ${fields}">
+
+        <td th:text="${field.fieldId}">1</td>
+        <td th:text="${field.lat}">11.11</td>
+        <td th:text="${field.lon}">-10.12</td>
+        <td th:text="${field.fieldName}">Name</td>
+
+        <td th:text="${field.account.accountName}">AccountName</td>
+        <td th:text="${field.account.accountEmail}">AccountEmail</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

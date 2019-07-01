@@ -1,0 +1,24 @@
+spring:
+  main:
+    banner-mode: "off"
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/grain
+    username: postgres
+    password: example
+    initialization-mode: embedded
+    platform: postgres
+
+  jpa:
+    generate-ddl: false
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
