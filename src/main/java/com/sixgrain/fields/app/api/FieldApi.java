@@ -1,9 +1,8 @@
 package com.sixgrain.fields.app.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.sixgrain.fields.app.domain.Views;
-import lombok.extern.slf4j.Slf4j;
 
+import com.sixgrain.fields.app.domain.Views;
 import com.sixgrain.fields.app.domain.Field;
 import com.sixgrain.fields.app.exception.FieldNotFoundException;
 import com.sixgrain.fields.app.service.FieldService;
@@ -13,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import lombok.extern.slf4j.Slf4j;
 import javax.validation.Valid;
 import java.util.List;
 
