@@ -9,6 +9,9 @@ import com.sixgrain.fields.app.exception.FieldNotFoundException;
 import com.sixgrain.fields.app.service.FieldService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +20,8 @@ import java.util.Optional;
 
 @Service
 public class FieldServiceImpl implements FieldService {
+
+    public static final String ID = "fieldId";
 
     private final FieldRepository fieldRepository;
     private final AccountRepository accountRepository;
@@ -41,6 +46,13 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public List<Field> getAll() {
         return fieldRepository.findAll();
+    }
+
+    @Override
+    public Page<Field> getAllByPage(int currentPage, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(--currentPage, pageSize,
+                Sort.by(Sort.Direction.ASC, ID));
+        return fieldRepository.findAll(pageRequest);
     }
 
     @Override

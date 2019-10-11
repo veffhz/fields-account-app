@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,7 +21,9 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.UpperCamelCaseStrategy.class)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "accounts")
+@NamedEntityGraph(name = "account.fields", attributeNodes = @NamedAttributeNode("fields"))
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

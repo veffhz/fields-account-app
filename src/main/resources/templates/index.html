@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="field : ${fields}">
+    <tr th:each="field : ${fieldPage.content}">
 
         <td th:text="${field.fieldId}">1</td>
         <td th:text="${field.lat}">11.11</td>
@@ -33,5 +33,13 @@
     </tr>
     </tbody>
 </table>
+
+<div th:if="${fieldPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/(size=${fieldPage.size}, page=${pageNumber})}"
+       th:text=${pageNumber}
+       th:class="${pageNumber==fieldPage.number + 1} ? active"></a>
+</div>
+
 </body>
 </html>

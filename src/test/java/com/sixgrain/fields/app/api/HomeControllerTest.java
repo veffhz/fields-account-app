@@ -9,10 +9,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +24,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,11 +50,13 @@ class HomeControllerTest {
                 new Field(11.22, 22.11, "Test", new Account()),
                 new Field(11.22, 22.11, "Test", new Account()));
 
-        given(this.fieldService.getAll()).willReturn(fields);
+        Page<Field> page = new PageImpl<>(fields);
+
+        given(this.fieldService.getAllByPage(anyInt(), anyInt())).willReturn(page);
 
         this.mvc.perform(get("/").accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
-                .andExpect(model().attribute("fields", fields));
+                .andExpect(model().attribute("fieldPage", page));
     }
 }

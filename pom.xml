@@ -54,6 +54,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.197</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -62,6 +63,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>${artifactId}</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
